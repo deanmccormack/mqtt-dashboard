@@ -16,7 +16,7 @@ const CLUSTER_SIZE = 'meta/clustersize';
 
 const METRIC_PREFIX = 'com.hivemq';
 
-const DB_API_URL = 'http://mqtt-dashboard-lb-1160139393.eu-central-1.elb.amazonaws.com:8080/api';
+const DB_API_URL = 'https://mqtt-dashboard-lb-1160139393.eu-central-1.elb.amazonaws.com:8080/api';
 // metric
 const MSG_INCOMING_TOTAL_COUNT = `messages.incoming.total.count`;
 const MSG_OUTGOING_TOTAL_COUNT = `messages.outgoing.total.count`;

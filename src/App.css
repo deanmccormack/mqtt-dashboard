@@ -1,38 +1,107 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
+.grid-container {
+  display: grid;
+  grid-template-columns: 20vw 1fr 20vw;
+  grid-template-rows: 8vh 8fr 6vh 6vh;
+  height: 100vh;
   background-color: #282c34;
-  min-height: 100vh;
+  color: white;
+}
+
+.header {
+  grid-column: 1 / 3;
+  grid-row: 1 / 2;
+  grid-column-gap: 1vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.side-metrics {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3 ;
+  background-color: #648ca6;
+  margin-left: 1vw;
+  border-radius: 1vw;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.side-metrics section {
+  padding: .2rem;
+  margin: .2rem;
+  border-radius: .2rem;
+}
+
+.side-metrics div {
+  border-radius: .2rem;
+  margin-bottom: .2rem;
+}
+
+.side-metric {
+  display: flex;
+  flex-direction: column;
+}
+
+.side-metric span {
+  margin-bottom: .4rem;
+}
+
+.main {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+  background-color: #8fd4d9;
+  margin: 0 1vw;
+  border-radius: 1vw;
+  padding: 1rem;
+}
+
+.info-container {
+  display: flex;
+  flex-direction: column;
+  grid-column: 3 / 4;
+  grid-row: 2 / 3 ;
+  background-color: #648ca6;
+  margin-right: 1vw;
+  border-radius: 1vw;
+  padding: .2rem;
+}
+
+.info-container section {
+  padding: .2rem;
+  margin: .2rem;
+  border-radius: .2rem;
+}
+
+.content {
+  background-color: lightgray;
+  color: #3B4252;
+}
+
+.settings {
+  grid-column: 1 / 4;
+  grid-row: 3/ 4;
+  display: flex;
+  justify-content: space-between;
+}
+
+.connection-settings {
+  display: flex;
+}
+
+.settings div {
+  margin: .2rem 1rem;
+}
+
+.refresh-rate {
+  display: flex;
+}
+
+.refresh-rate {
+  margin: .5rem;
+}
+
+.footer {
+  grid-column: 1 / 4;
+  grid-row: 4 / 5;
+  border-top: 1px solid grey;
 }

@@ -84,6 +84,7 @@
 .chart {
   margin:.2rem;
   border: 1px solid darkgray;
+  background-color: lightgray;
 }
 
 .info-container {

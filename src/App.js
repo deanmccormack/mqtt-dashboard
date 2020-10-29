@@ -3,9 +3,9 @@ import { useState, useEffect } from 'react';
 import './App.css';
 
 import BrokerInfo from './components/BrokerInfo';
+import ChartOne from './components/ChartOne';
 import ConnectionSettings from './components/ConnectionSettings';
 import GettingStartInfo from './components/GettingStartInfo';
-import Metric from './components/Metric';
 import MetricsContainer from './components/MetricsContainer';
 import RefreshRate from './components/RefreshRate';
 
@@ -116,12 +116,15 @@ const SubscriptionMetricsKeys = [
 const METRIC_REFRESH = 5000;
 
 function App() {
+
   const [metricRefresh, setMetricRefresh] = useState(METRIC_REFRESH);
   const [metrics, setMetrics] = useState(Metrics);
   const [historyMetrics, setHistoryMetrics] = useState(HistoryMetrics);
 
+  /*
+
+
   useEffect(() => {
-    /*
     const id = setInterval(async() =>  {
       const requests = MetricUrls.map(metricUrl => fetch(metricUrl));
       const responses = await Promise.all(requests);
@@ -133,8 +136,9 @@ function App() {
       setMetrics(newMetrics);
       setHistoryMetrics([...historyMetrics, newMetrics])
     }, metricRefresh);
-    return () => clearInterval(id);*/
+    return () => clearInterval(id);
   }, [historyMetrics, metricRefresh]);
+  */
 
   return (
     <div class="grid-container">
@@ -162,10 +166,15 @@ function App() {
         </section>
       </aside>
       <main class="main">
-        <div id="main-chart" className="chart">Main Charts Go Here</div>
-        <div className="chart">Charts Go Here</div>
-        <div className="chart">Charts Go Here</div>
-        <div className="chart">Charts Go Here</div>
+        <div
+          id="main-chart"
+          className="chart"
+        >
+          <ChartOne />
+        </div>
+        <div className="chart"><ChartOne /></div>
+        <div className="chart"><ChartOne /></div>
+        <div className="chart"><ChartOne /></div>
       </main>
       <aside class="info-container">
         <BrokerInfo />

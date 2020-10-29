@@ -13,5 +13,5 @@ export default function Metric({
 };
 Metric.propTypes = {
   label: PropTypes.string,
-  value: PropTypes.string,
+  value: PropTypes.number,
 }

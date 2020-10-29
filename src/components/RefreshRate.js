@@ -10,5 +10,5 @@ export default function RefreshRate({
   );
 };
 RefreshRate.propTypes = {
-  value: PropTypes.string,
+  value: PropTypes.number,
 };

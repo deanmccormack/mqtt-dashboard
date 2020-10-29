@@ -7,7 +7,7 @@ export default function MetricsContainer({
   metrics,
   labels
 }) {
-  return keys.map(metric => (<Metric value={metrics[metric]} label={labels[metric]} />))
+  return keys.map((metric, i) => (<Metric key={i} value={metrics[metric]} label={labels[metric]} />))
 }
 MetricsContainer.propTypes = {
   keys: PropTypes.array,

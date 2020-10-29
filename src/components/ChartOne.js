@@ -9,10 +9,7 @@ import {
   AreaSeries
 } from 'react-vis';
 
-export default function ChartOne({
-  height,
-  width
-}) {
+export default function ChartOne(props) {
   return (
   <AutoSizer>
     {({ height, width }) => (

@@ -63,6 +63,24 @@ const getMessageStreamChartData = (historyMetrics) =>
   [MSG_RETAINED_CURRENT_COUNT]: []
 });
 
+const getGaugeChartData = (historyMetrics) => ([
+  {x: 1, y: 10},
+  {x: 2, y: 5},
+  {x: 3, y: 15}
+]);
+
+const getConnectionChartData = (historyMetrics) => ([
+  {x: 1, y: 10},
+  {x: 2, y: 5},
+  {x: 3, y: 15}
+]);
+
+const getNetworkStreamChartData  = (historyMetrics) => ([
+  {x: 1, y: 10},
+  {x: 2, y: 5},
+  {x: 3, y: 15}
+]);
+
 // order! Metrics=MetricsUrls
 const DefaultMetrics = {
   [CLUSTER_SIZE]: 4,
@@ -78,7 +96,10 @@ const DefaultMetrics = {
 };
 
 export {
+  getConnectionChartData,
+  getGaugeChartData,
   getMessageStreamChartData,
+  getNetworkStreamChartData,
   ConnectionMetricsKeys,
   DefaultMetrics,
   MessageMetricsKeys,

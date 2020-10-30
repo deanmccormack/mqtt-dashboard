@@ -1,10 +1,17 @@
 
 import PropTypes from 'prop-types';
 
-import { getMessageStreamChartData } from '../model/metrics';
+import {
+  getGaugeChartData,
+  getMessageStreamChartData,
+  getNetworkStreamChartData,
+  getConnectionChartData,
+} from '../model/metrics';
 
-import ChartOne from '../components/ChartOne';
-import ChartTwo from '../components/ChartTwo';
+import NetworkStreamChart from './NetworkStreamChart';
+import Gauge from './Gauge';
+import MessageStreamChart from './MessageStreamChart';
+import ConnectionChart from './ConnectionChart';
 
 export default function ChartView({
   historyMetrics
@@ -15,10 +22,17 @@ export default function ChartView({
         ? 'Loading...'
         : <>
           <div id="main-chart" className="chart">
-            <ChartTwo data={getMessageStreamChartData(historyMetrics)} />
+            <MessageStreamChart data={getMessageStreamChartData(historyMetrics)} />
           </div>
-          <div className="chart"><ChartOne /></div>
-          <div className="chart"><ChartOne /></div>
+          <div id="gauge-chart" className="chart">
+            <Gauge data={getGaugeChartData(historyMetrics)} />
+          </div>
+          <div className="chart">
+            <ConnectionChart data={getConnectionChartData(historyMetrics)} />
+          </div>
+          <div className="chart">
+            <NetworkStreamChart data={getNetworkStreamChartData(historyMetrics)} />
+          </div>
           </>
     }
     </div>

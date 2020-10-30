@@ -78,7 +78,7 @@
 .chart-view {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 2fr 1fr;
+  grid-template-rows: 4fr .5fr 2fr;
   min-width: 60%;
   min-height: 78vh;
   background-color: #648ca6;
@@ -90,6 +90,11 @@
 #main-chart {
   grid-column: 1 / 3;
   grid-row: 1 / 2;
+}
+
+#gauge-chart {
+  grid-column: 1 / 3;
+  grid-row: 2 / 3;
 }
 
 .chart {

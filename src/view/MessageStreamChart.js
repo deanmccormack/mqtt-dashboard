@@ -4,15 +4,12 @@ import {
   YAxis,
   VerticalGridLines,
   HorizontalGridLines,
-  AreaSeries,
-  LineMarkSeries,
+  LineSeries,
 } from 'react-vis';
 
 import {
   MSG_INCOMING_TOTAL_COUNT,
   MSG_OUTGOING_TOTAL_COUNT,
-  MSG_QUEUED_COUNT,
-  MSG_RETAINED_CURRENT_COUNT,
 } from '../types/metric-types';
 
 export default function MessageStreamChart({
@@ -22,27 +19,15 @@ export default function MessageStreamChart({
     <FlexibleXYPlot>
       <VerticalGridLines />
       <HorizontalGridLines />
-      <XAxis />
-      <YAxis />
-      <AreaSeries
-        className="area-elevated-series-1"
-        color="#79c7e3"
+      <XAxis title="Stream Window"/>
+      <YAxis title="Message Count"/>
+      <LineSeries
         data={data[MSG_INCOMING_TOTAL_COUNT]}
+        style={{stroke: '#e708d1', strokeWidth: 3}}
       />
-      <AreaSeries LineMarkSeries
-        className="area-elevated-series-2"
-        color="#12939a"
+      <LineSeries
+        style={{stroke: '#12939a', strokeWidth: 3}}
         data={data[MSG_OUTGOING_TOTAL_COUNT]}
-      />
-      <AreaSeries LineMarkSeries
-        className="area-elevated-series-2"
-        color="#19129b"
-        data={data[MSG_RETAINED_CURRENT_COUNT]}
-      />
-      <AreaSeries LineMarkSeries
-       className="area-elevated-series-2"
-       color="#9b126e"
-       data={data[MSG_QUEUED_COUNT]}
       />
     </FlexibleXYPlot>
   );

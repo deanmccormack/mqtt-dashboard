@@ -1,9 +1,6 @@
 import {
   FlexibleXYPlot,
-  XAxis,
-  YAxis,
-  LineSeries,
-  HorizontalGridLines,
+  HorizontalBarSeries,
 } from 'react-vis';
 
  export default function Gauge({
@@ -11,12 +8,10 @@ import {
  }) {
   return (
     <FlexibleXYPlot>
-      <HorizontalGridLines />
-      <LineSeries
+      <HorizontalBarSeries
         color="red"
-        data={data}/>
-    <XAxis title="X" />
-    <YAxis />
+        data={data}
+      />
     </FlexibleXYPlot>
   );
 }

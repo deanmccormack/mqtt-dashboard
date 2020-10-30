@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { DefaultMetrics, MetricCountGenerator } from '../model/metrics';
+import { DefaultMetrics, nextMetricsSlice } from '../model/metrics';
 
 const HistoryMetrics = [];
 
@@ -10,11 +10,7 @@ export default function useMetricDataPump({ metricRefresh }) {
 
   useEffect(() => {
     const id = setInterval(() =>  {
-      const newMetrics = Object.keys(MetricCountGenerator)
-        .reduce((acc, metric, ) => ({
-          ...acc,
-          [metric]: MetricCountGenerator[metric](),
-        }), {});
+      const newMetrics = nextMetricsSlice(metrics);
       setMetrics(newMetrics);
       setHistoryMetrics([
         ...(historyMetrics.length > 1200
@@ -25,7 +21,7 @@ export default function useMetricDataPump({ metricRefresh }) {
       ])
     }, metricRefresh);
     return () => clearInterval(id);
-  }, [historyMetrics, metricRefresh]);
+  }, [historyMetrics, metricRefresh, metrics]);
 
   return [ metrics, historyMetrics ];
   /*

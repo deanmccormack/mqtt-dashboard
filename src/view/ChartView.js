@@ -8,6 +8,8 @@ import {
   getConnectionChartData,
 } from '../model/metrics';
 
+import StreamWindowChartControl from '../components/StreamWindowChartControl';
+
 import NetworkStreamChart from './NetworkStreamChart';
 import Gauge from './Gauge';
 import MessageStreamChart from './MessageStreamChart';
@@ -21,6 +23,9 @@ export default function ChartView({
     {historyMetrics.length === 0
         ? 'Loading...'
         : <>
+          <div id="chart-controls">
+            <StreamWindowChartControl window={1000} slide={0} delta={2000} />
+          </div>
           <div id="main-chart" className="chart">
             <MessageStreamChart data={getMessageStreamChartData(historyMetrics)} />
           </div>

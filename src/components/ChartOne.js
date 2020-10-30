@@ -1,20 +1,17 @@
-import { AutoSizer } from 'react-virtualized';
+//import { AutoSizer } from 'react-virtualized';
 
 import {
-  XYPlot,
+  FlexibleXYPlot,
   XAxis,
   YAxis,
   VerticalGridLines,
   HorizontalGridLines,
-  AreaSeries
+  AreaSeries,
 } from 'react-vis';
 
-export default function ChartOne(props) {
+ export default function ChartOne(props) {
   return (
-  <AutoSizer>
-    {({ height, width }) => (
-
-    <XYPlot width={width} height={height}>
+    <FlexibleXYPlot>
       <VerticalGridLines />
       <HorizontalGridLines />
       <XAxis />
@@ -24,7 +21,6 @@ export default function ChartOne(props) {
         curve="curveNatural"
         data={[{x: 1, y: 10}, {x: 2, y: 5}, {x: 3, y: 15}]}
       />
-    </XYPlot>)}
-  </AutoSizer>
+    </FlexibleXYPlot>
   );
 }

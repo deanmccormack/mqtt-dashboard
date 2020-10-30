@@ -7,7 +7,7 @@ export default function Metric({
   return (
     <div className="side-metric content">
       <span>{label}</span>
-      <span>{value}</span>
+      <span className="side-metric-value">{value}</span>
     </div>
   );
 };

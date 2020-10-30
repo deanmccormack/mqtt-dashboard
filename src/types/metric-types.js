@@ -1,4 +1,6 @@
 // metric
+export const CLUSTER_SIZE = 'meta/clustersize';
+
 export const NETWORKING_BYTES_WRITE_TOTAL = `networking.bytes.write.total`;
 export const MSG_INCOMING_TOTAL_COUNT = `messages.incoming.total.count`;
 export const MSG_OUTGOING_TOTAL_COUNT = `messages.outgoing.total.count`;

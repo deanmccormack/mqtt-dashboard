@@ -1,7 +1,5 @@
-import { AutoSizer } from 'react-virtualized';
-
 import {
-  XYPlot,
+  FlexibleXYPlot,
   XAxis,
   YAxis,
   VerticalGridLines,
@@ -15,16 +13,13 @@ import {
   MSG_OUTGOING_TOTAL_COUNT,
   MSG_QUEUED_COUNT,
   MSG_RETAINED_CURRENT_COUNT,
-} from '../metric-types';
+} from '../types/metric-types';
 
 export default function ChartTwo({
   data,
 }) {
   return (
-  <AutoSizer>
-    {({ height, width }) => (
-
-      <XYPlot width={300} height={300}>
+      <FlexibleXYPlot>
        <VerticalGridLines />
        <HorizontalGridLines />
        <XAxis />
@@ -42,19 +37,13 @@ export default function ChartTwo({
        <AreaSeries LineMarkSeries
          className="area-elevated-series-2"
          color="#19129b"
-         data={data[MSG_QUEUED_COUNT]}
+         data={data[MSG_RETAINED_CURRENT_COUNT]}
        />
        <AreaSeries LineMarkSeries
          className="area-elevated-series-2"
          color="#9b126e"
-         data={data[MSG_RETAINED_CURRENT_COUNT]}
+         data={data[MSG_QUEUED_COUNT]}
        />
-
-     </XYPlot>
-
-
-
-    )}
-    </AutoSizer>
+     </FlexibleXYPlot>
   );
 }

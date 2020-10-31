@@ -102,12 +102,13 @@
 }
 
 .window-chart-control div {
-  margin: 0 .2rem;  
+  margin: 0 .2rem;
 }
 
 #main-chart {
   grid-column: 1 / 3;
   grid-row: 2 / 3;
+  padding: .2rem;
 }
 
 #gauge-chart {
@@ -118,7 +119,7 @@
 .chart {
   margin:.2rem;
   border: 1px solid darkgray;
-  background-color: lightgray;
+  background-color: #272727;
 }
 
 .info-container {

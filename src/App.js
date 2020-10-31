@@ -21,12 +21,28 @@ const PORT = '8000';
 
 const HOST = 'broker.hivemq.com';
 
-const METRIC_REFRESH = 2000;
+const SCREEN_REFRESH = 2000;
 
 function App() {
+  const [screenRefresh, setScreenRefresh] = useState(SCREEN_REFRESH);
+  const [metrics, historyMetrics] = useMetricDataPump({ screenRefresh });
 
-  const [metricRefresh, setMetricRefresh] = useState(METRIC_REFRESH);
-  const [metrics, historyMetrics] = useMetricDataPump({ metricRefresh });
+  const [pauseOnMetrics, setPauseOnMetrics] = useState([]);
+  const [isScreenPaused, setIsScreenPaused] = useState(false);
+
+  const handleScreenPauseClick = (e) => {
+    e.preventDefault();
+    if (isScreenPaused) {
+      setPauseOnMetrics([])
+    } else {
+      setPauseOnMetrics([...historyMetrics]);
+    }
+    setIsScreenPaused(!isScreenPaused);
+  }
+
+  const getMetricSlices = (isScreenPaused) => isScreenPaused
+    ? pauseOnMetrics
+    : historyMetrics;
 
   return (
     <div className="grid-container">
@@ -38,14 +54,17 @@ function App() {
           <SideMetricsView metrics={metrics} />
         </aside>
         <main className="main">
-          <ChartView historyMetrics={historyMetrics}/>
+          <ChartView
+            historyMetrics={getMetricSlices(isScreenPaused)}
+            handleScreenPauseClick={handleScreenPauseClick}
+            isScreenPaused={isScreenPaused}
+          />
         </main>
         <InfoContainer />
       </div>
-      <SettingsContainer host={HOST} port={PORT} refreshRate={metricRefresh} />
+      <SettingsContainer host={HOST} port={PORT} refreshRate={screenRefresh} />
       <Footer />
     </div>
-
   );
 }
 

@@ -12,3 +12,5 @@ export const NETWORKING_CONNECTIONS_CURRENT = `networking.connections.current`;
 
 export const SESSSIONS_OVERALL_COUNT = `sessions.overall.current`
 export const SUB_OVERALL_CURRENT_COUNT = `subscriptions.overall.current`;
+
+export const TIME_STAMP = `time.stamp;`;

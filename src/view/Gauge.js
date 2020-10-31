@@ -1,17 +1,16 @@
 import {
   FlexibleXYPlot,
   HorizontalBarSeries,
+  VerticalGridLines
 } from 'react-vis';
 
  export default function Gauge({
    data,
  }) {
   return (
-    <FlexibleXYPlot>
-      <HorizontalBarSeries
-        color="red"
-        data={data}
-      />
+    <FlexibleXYPlot stackBy="x" xDomain={data.xDomain}>
+      <VerticalGridLines />
+      <HorizontalBarSeries data={data.data} />
     </FlexibleXYPlot>
   );
 }

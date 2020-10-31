@@ -1,4 +1,3 @@
-
 import PropTypes from 'prop-types';
 
 import {
@@ -16,18 +15,24 @@ import MessageStreamChart from './MessageStreamChart';
 import ConnectionChart from './ConnectionChart';
 
 export default function ChartView({
-  historyMetrics
+  historyMetrics,
+  handleScreenPauseClick,
+  isScreenPaused,
 }) {
+
   return (
     <div className="chart-view">
     {historyMetrics.length === 0
-        ? 'Loading...'
-        : <>
+      ? 'Loading...'
+      : <>
           <div id="chart-controls">
-            <StreamWindowChartControl window={1000} slide={0} delta={2000} />
+            <StreamWindowChartControl window={300} slide={0} delta={2} />
+            <button onClick={handleScreenPauseClick}>
+              {isScreenPaused? 'Resume' : 'Pause' }
+            </button>
           </div>
           <div id="main-chart" className="chart">
-            <MessageStreamChart data={getMessageStreamChartData(historyMetrics)} />
+            <MessageStreamChart data={getMessageStreamChartData(historyMetrics, 300, 2000)} />
           </div>
           <div id="gauge-chart" className="chart">
             <Gauge data={getGaugeChartData(historyMetrics)} />
@@ -38,7 +43,7 @@ export default function ChartView({
           <div className="chart">
             <NetworkStreamChart data={getNetworkStreamChartData(historyMetrics)} />
           </div>
-          </>
+        </>
     }
     </div>
   );
@@ -46,4 +51,6 @@ export default function ChartView({
 ChartView.propTypes = {
   // FIXME: shapeOf
   historyMetrics: PropTypes.array,
+  handleScreenPauseClick: PropTypes.func,
+  isScreenPaused: PropTypes.bool,
 };

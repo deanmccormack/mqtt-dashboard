@@ -2,8 +2,6 @@ import {
   FlexibleXYPlot,
   XAxis,
   YAxis,
-  VerticalGridLines,
-  HorizontalGridLines,
   LineSeries,
 } from 'react-vis';
 
@@ -16,18 +14,28 @@ export default function MessageStreamChart({
   data,
 }) {
   return (
-    <FlexibleXYPlot>
-      <VerticalGridLines />
-      <HorizontalGridLines />
-      <XAxis title="Stream Window"/>
-      <YAxis title="Message Count"/>
+    <FlexibleXYPlot
+      dontCheckIfEmpty
+      xType={'time'}
+      xDomain={data.xDomain}
+      yDomain={data.yDomain}
+    >
+      <XAxis
+        title="Stream Window"
+        attr="x"
+        orientation="bottom"
+        tickFormat={(d) => new Date(d).toLocaleTimeString()}
+        tickLabelAngle={120}
+      />
+      <YAxis title="Message Count" />
       <LineSeries
-        data={data[MSG_INCOMING_TOTAL_COUNT]}
-        style={{stroke: '#e708d1', strokeWidth: 3}}
+        data={data.data[MSG_INCOMING_TOTAL_COUNT]}
+        getNull={(d) => d.y !== null}
+        style={{strokeWidth: 2}}
       />
       <LineSeries
-        style={{stroke: '#12939a', strokeWidth: 3}}
-        data={data[MSG_OUTGOING_TOTAL_COUNT]}
+        style={{strokeWidth: 2}}
+        data={data.data[MSG_OUTGOING_TOTAL_COUNT]}
       />
     </FlexibleXYPlot>
   );

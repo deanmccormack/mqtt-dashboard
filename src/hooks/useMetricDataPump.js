@@ -4,7 +4,8 @@ import { DefaultMetrics, nextMetricsSlice } from '../model/metrics';
 
 const HistoryMetrics = [];
 
-export default function useMetricDataPump({ metricRefresh }) {
+export default function useMetricDataPump({ screenRefresh }) {
+
   const [metrics, setMetrics] = useState(DefaultMetrics);
   const [historyMetrics, setHistoryMetrics] = useState(HistoryMetrics);
 
@@ -19,9 +20,9 @@ export default function useMetricDataPump({ metricRefresh }) {
         ),
         newMetrics
       ])
-    }, metricRefresh);
+    }, 1000);
     return () => clearInterval(id);
-  }, [historyMetrics, metricRefresh, metrics]);
+  }, [historyMetrics, metrics]);
 
   return [ metrics, historyMetrics ];
   /*

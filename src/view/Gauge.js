@@ -5,12 +5,13 @@ import {
 } from 'react-vis';
 
  export default function Gauge({
-   data,
+   chartProps,
  }) {
+  const { color, data, xDomain } = chartProps;
   return (
-    <FlexibleXYPlot stackBy="x" xDomain={data.xDomain}>
+    <FlexibleXYPlot  margin={{bottom: 0, top: 0}} stackBy="x" xDomain={xDomain}>
       <VerticalGridLines />
-      <HorizontalBarSeries data={data.data} />
+      <HorizontalBarSeries opacity={.7} color={color} data={data} />
     </FlexibleXYPlot>
   );
 }

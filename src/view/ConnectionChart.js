@@ -2,25 +2,20 @@ import {
   FlexibleXYPlot,
   XAxis,
   YAxis,
-  VerticalGridLines,
-  HorizontalGridLines,
-  AreaSeries,
+  VerticalBarSeries,
 } from 'react-vis';
 
  export default function ConnectionChart({
-   data
+   chartProps
  }) {
-  return (
-    <FlexibleXYPlot>
-      <VerticalGridLines />
-      <HorizontalGridLines />
-      <XAxis />
-      <YAxis />
-      <AreaSeries
-        className="area-series-example"
-        curve="curveNatural"
-        data={data}
-      />
-    </FlexibleXYPlot>
+
+ const { data, yDomain } = chartProps;
+
+ return (
+   <FlexibleXYPlot xType="ordinal">
+     <XAxis />
+     <YAxis yDomain={yDomain} />
+     <VerticalBarSeries data={data} />
+   </FlexibleXYPlot>
   );
 }

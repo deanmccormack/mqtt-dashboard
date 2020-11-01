@@ -5,7 +5,8 @@ import {
   getMessageStreamChartData,
   getNetworkStreamChartData,
   getConnectionChartData,
-} from '../model/metrics';
+  getTotalConnectionChartData,
+} from '../model/chart-data';
 
 import StreamWindowChartControl from '../components/StreamWindowChartControl';
 
@@ -13,6 +14,7 @@ import NetworkStreamChart from './NetworkStreamChart';
 import Gauge from './Gauge';
 import MessageStreamChart from './MessageStreamChart';
 import ConnectionChart from './ConnectionChart';
+import TotalConnectionChart from './TotalConnectionChart';
 
 export default function ChartView({
   historyMetrics,
@@ -32,16 +34,16 @@ export default function ChartView({
             </button>
           </div>
           <div id="main-chart" className="chart">
-            <MessageStreamChart data={getMessageStreamChartData(historyMetrics, 300, 2000)} />
+            <MessageStreamChart chartProps={getMessageStreamChartData(historyMetrics, 300, 2 * 1000)} />
           </div>
           <div id="gauge-chart" className="chart">
-            <Gauge data={getGaugeChartData(historyMetrics)} />
+            <Gauge chartProps={getGaugeChartData(historyMetrics)} />
           </div>
           <div className="chart">
-            <ConnectionChart data={getConnectionChartData(historyMetrics)} />
+            <ConnectionChart chartProps={getConnectionChartData(historyMetrics)} />
           </div>
           <div className="chart">
-            <NetworkStreamChart data={getNetworkStreamChartData(historyMetrics)} />
+            <NetworkStreamChart chartProps={getNetworkStreamChartData(historyMetrics)} />
           </div>
         </>
     }

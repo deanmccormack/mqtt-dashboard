@@ -8,17 +8,19 @@ import {
 import {
   MSG_INCOMING_TOTAL_COUNT,
   MSG_OUTGOING_TOTAL_COUNT,
+  MSG_RETAINED_CURRENT_COUNT,
 } from '../types/metric-types';
 
 export default function MessageStreamChart({
-  data,
+  chartProps
 }) {
+  const { data, xDomain, yDomain } = chartProps;
   return (
     <FlexibleXYPlot
       dontCheckIfEmpty
       xType={'time'}
-      xDomain={data.xDomain}
-      yDomain={data.yDomain}
+      xDomain={xDomain}
+      yDomain={yDomain}
     >
       <XAxis
         title="Stream Window"
@@ -29,13 +31,17 @@ export default function MessageStreamChart({
       />
       <YAxis title="Message Count" />
       <LineSeries
-        data={data.data[MSG_INCOMING_TOTAL_COUNT]}
+        data={data[MSG_INCOMING_TOTAL_COUNT]}
         getNull={(d) => d.y !== null}
         style={{strokeWidth: 2}}
       />
       <LineSeries
         style={{strokeWidth: 2}}
-        data={data.data[MSG_OUTGOING_TOTAL_COUNT]}
+        data={data[MSG_OUTGOING_TOTAL_COUNT]}
+      />
+      <LineSeries
+        style={{strokeWidth: 2}}
+        data={data[MSG_RETAINED_CURRENT_COUNT]}
       />
     </FlexibleXYPlot>
   );

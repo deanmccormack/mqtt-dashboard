@@ -2,25 +2,20 @@ import {
   FlexibleXYPlot,
   XAxis,
   YAxis,
-  VerticalGridLines,
-  HorizontalGridLines,
-  AreaSeries,
+  VerticalBarSeries,
 } from 'react-vis';
 
  export default function NetworkStreamChart({
-   data
+   chartProps
  }) {
+
+  const { data, yDomain } = chartProps;
+
   return (
-    <FlexibleXYPlot>
-      <VerticalGridLines />
-      <HorizontalGridLines />
+    <FlexibleXYPlot xType="ordinal">
       <XAxis />
-      <YAxis />
-      <AreaSeries
-        className="area-series-example"
-        curve="curveNatural"
-        data={data}
-      />
+      <YAxis yDomain={yDomain} />
+      <VerticalBarSeries data={data} />
     </FlexibleXYPlot>
   );
 }

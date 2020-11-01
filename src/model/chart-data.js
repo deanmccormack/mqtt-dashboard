@@ -8,14 +8,12 @@ import {
   NETWORKING_BYTES_READ_TOTAL,
   NETWORKING_CONNECTIONS_CURRENT,
   MSG_RETAINED_CURRENT_COUNT,
-  SESSSIONS_OVERALL_COUNT,
+  //SESSSIONS_OVERALL_COUNT,
   SUB_OVERALL_CURRENT_COUNT,
   TIME_STAMP,
 } from '../types/metric-types';
 
 const createSliceData = (x, y) => ({x, y});
-
-const createSliceOffsetTimeStamp = (timeStamp, offset) => new Date(timeStamp - offset).valueOf();
 
 const getMax = (a, b) => a > b
   ? a
@@ -25,29 +23,13 @@ const getMaxProp = (a, prop) => a.reduce((acc, el) => getMax(acc, el[prop]), 0);
 const getMaxY = (a) => getMaxProp(a, 'y');
 //const getMaxX = (a) => getMaxProp(a, 'x');
 
-const createFill = (fill, rightTimeStamp, timeDelta) => {
-  let pivot = rightTimeStamp
-  return [...new Array(fill)].map((el, i) => {
-    pivot = createSliceOffsetTimeStamp(pivot, timeDelta);
-    return createSliceData(
-      pivot,
-      null
-    )
-  }).reverse()
-};
-
 const getCurrentMetrics = (metrics) => metrics[metrics.length -1];
 const getCurrentMetricsValue = (metrics, key) => getCurrentMetrics(metrics)[key];
 
 const getMessageStreamChartData = (historyMetrics, window, timeDelta) => {
   if (historyMetrics.length < 0) {
-    return
+    return;
   }
-
-  const fill = window - historyMetrics.length;
-  const filler = fill > 0
-    ? createFill(fill, getCurrentMetricsValue(historyMetrics, TIME_STAMP), timeDelta)
-    : [];
 
   const windowMetrics = window < historyMetrics.length // timeDelta / 1000
     ? historyMetrics.slice(historyMetrics.length - window)
@@ -58,9 +40,9 @@ const getMessageStreamChartData = (historyMetrics, window, timeDelta) => {
     [MSG_OUTGOING_TOTAL_COUNT]: [...acc[MSG_OUTGOING_TOTAL_COUNT], createSliceData(slice[TIME_STAMP], slice[MSG_OUTGOING_TOTAL_COUNT])],
     [MSG_RETAINED_CURRENT_COUNT]: [...acc[MSG_RETAINED_CURRENT_COUNT], createSliceData(slice[TIME_STAMP], slice[MSG_RETAINED_CURRENT_COUNT])],
   }), {
-    [MSG_INCOMING_TOTAL_COUNT]: [...filler],
-    [MSG_OUTGOING_TOTAL_COUNT]: [...filler],
-    [MSG_RETAINED_CURRENT_COUNT]: [...filler],
+    [MSG_INCOMING_TOTAL_COUNT]: [],
+    [MSG_OUTGOING_TOTAL_COUNT]: [],
+    [MSG_RETAINED_CURRENT_COUNT]: [],
   });
 
   const xDomain = [data[MSG_INCOMING_TOTAL_COUNT][0].x, data[MSG_INCOMING_TOTAL_COUNT][window -1].x];

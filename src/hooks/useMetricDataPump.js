@@ -1,30 +1,20 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
-import { DefaultMetrics, nextMetricsSlice } from '../model/metrics';
-
-const HistoryMetrics = [];
+import DataPumpContext from '../context/DataPumpContext';
 
 export default function useMetricDataPump({ screenRefresh }) {
+  const dataPump = React.useContext(DataPumpContext);
 
-  const [metrics, setMetrics] = useState(DefaultMetrics);
-  const [historyMetrics, setHistoryMetrics] = useState(HistoryMetrics);
+  const [metricsStream, setMetricsStream] = useState(dataPump.getMetricsStream());
 
   useEffect(() => {
     const id = setInterval(() =>  {
-      const newMetrics = nextMetricsSlice(metrics);
-      setMetrics(newMetrics);
-      setHistoryMetrics([
-        ...(historyMetrics.length > 1200
-          ? historyMetrics.slice(200)
-          : historyMetrics
-        ),
-        newMetrics
-      ])
-    }, 1000);
+      setMetricsStream(dataPump.getMetricsStream())
+    }, screenRefresh);
     return () => clearInterval(id);
-  }, [historyMetrics, metrics]);
+  }, [dataPump, screenRefresh]);
 
-  return [ metrics, historyMetrics ];
+  return [metricsStream[metricsStream.length -1], metricsStream];
   /*
   useEffect(() => {
     const id = setInterval(async() =>  {

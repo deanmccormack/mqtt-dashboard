@@ -3,11 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import '../node_modules/react-vis/dist/style.css';  
+import '../node_modules/react-vis/dist/style.css';
+
+import DataPumpContext from './context/DataPumpContext';
+import createDataPump from './model/data-pump';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <DataPumpContext.Provider value={createDataPump()} >
+      <App />
+    </DataPumpContext.Provider >
   </React.StrictMode>,
   document.getElementById('root')
 );

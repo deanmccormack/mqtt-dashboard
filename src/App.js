@@ -25,7 +25,7 @@ const SCREEN_REFRESH = 2000;
 
 function App() {
   const [screenRefresh, setScreenRefresh] = useState(SCREEN_REFRESH);
-  const [metrics, historyMetrics] = useMetricDataPump({ screenRefresh });
+  const [metrics, metricsStream] = useMetricDataPump({ screenRefresh });
 
   const [pauseOnMetrics, setPauseOnMetrics] = useState([]);
   const [isScreenPaused, setIsScreenPaused] = useState(false);
@@ -35,14 +35,14 @@ function App() {
     if (isScreenPaused) {
       setPauseOnMetrics([])
     } else {
-      setPauseOnMetrics([...historyMetrics]);
+      setPauseOnMetrics([...metricsStream]);
     }
     setIsScreenPaused(!isScreenPaused);
   }
 
   const getMetricSlices = (isScreenPaused) => isScreenPaused
     ? pauseOnMetrics
-    : historyMetrics;
+    : metricsStream;
 
   return (
     <div className="grid-container">
@@ -55,7 +55,7 @@ function App() {
         </aside>
         <main className="main">
           <ChartView
-            historyMetrics={getMetricSlices(isScreenPaused)}
+            metricsStream={getMetricSlices(isScreenPaused)}
             handleScreenPauseClick={handleScreenPauseClick}
             isScreenPaused={isScreenPaused}
           />

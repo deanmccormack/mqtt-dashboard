@@ -40,6 +40,8 @@ function App() {
     setIsScreenPaused(!isScreenPaused);
   }
 
+  const handleRefreshRateUpdate = (rate) => setScreenRefresh(rate);
+
   const getMetricSlices = (isScreenPaused) => isScreenPaused
     ? pauseOnMetrics
     : metricsStream;
@@ -62,7 +64,12 @@ function App() {
         </main>
         <InfoContainer />
       </div>
-      <SettingsContainer host={HOST} port={PORT} refreshRate={screenRefresh} />
+      <SettingsContainer
+        host={HOST}
+        port={PORT}
+        refreshRate={screenRefresh}
+        handleRefreshRateUpdate={handleRefreshRateUpdate}
+      />
       <Footer />
     </div>
   );

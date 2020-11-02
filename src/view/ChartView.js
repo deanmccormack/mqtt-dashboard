@@ -29,7 +29,7 @@ export default function ChartView({
       : <>
           <div id="chart-controls">
             <StreamWindowChartControl window={300} slide={0} delta={2} />
-            <button onClick={handleScreenPauseClick}>
+            <button style={{width: '6vw'}} onClick={handleScreenPauseClick}>
               {isScreenPaused? 'Resume' : 'Pause' }
             </button>
           </div>

@@ -42,13 +42,13 @@
 }
 
 .main {
-  min-width: 60%;
+  min-width: 64%;
 }
 .side-metrics {
   background-color: #648ca6;
   max-width: 16%;
   margin: .2vh .5vw;
-  border-radius: 1vw;
+  border-radius: .3rem;
 }
 
 .side-metrics section {
@@ -75,15 +75,25 @@
   color: #e76208;
 }
 
-.chart-view {
+.all-chart-view {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: .4fr 4fr .5fr 2fr;
+}
+
+.msg-chart-view {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: .4fr 6fr .5fr;
+}
+
+.chart-view {
   min-width: 40%;
   min-height: 78vh;
+  max-height: 80vh;
   background-color: #648ca6;
   margin: .2vh .5vw;
-  border-radius: 1vw;
+  border-radius: .3rem;
   padding: .5rem;
 }
 
@@ -93,6 +103,7 @@
   display: flex;
   justify-content: flex-end;
   padding: .2rem;
+  border-bottom: 1px solid white;
 }
 
 .window-chart-control {
@@ -125,17 +136,17 @@
 .info-container {
   display: flex;
   flex-direction: column;
-  max-width: 20%;
+  max-width: 18%;
   background-color: #648ca6;
   margin: .2vh .5vw;
-  border-radius: 1vw;
+  border-radius: .3rem;
   padding: .2rem;
 }
 
 .info-container section {
   padding: .2rem;
   margin: .2rem;
-  border-radius: .2rem;
+  border-radius: .3rem;
 }
 
 .content {

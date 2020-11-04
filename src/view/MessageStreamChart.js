@@ -27,7 +27,7 @@ export default function MessageStreamChart({
         attr="x"
         orientation="bottom"
         tickFormat={(d) => new Date(d).toLocaleTimeString()}
-        tickLabelAngle={120}
+        tickLabelAngle={270}
       />
       <YAxis title="Message Count" />
       <LineSeries

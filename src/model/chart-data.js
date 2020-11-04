@@ -26,14 +26,16 @@ const getMaxY = (a) => getMaxProp(a, 'y');
 const getCurrentMetrics = (metrics) => metrics[metrics.length -1];
 const getCurrentMetricsValue = (metrics, key) => getCurrentMetrics(metrics)[key];
 
-const getMessageStreamChartData = (historyMetrics, window, timeDelta) => {
+const getMessageStreamChartData = (historyMetrics, window, slide) => {
   if (historyMetrics.length < 0) {
     return;
   }
 
-  const windowMetrics = window < historyMetrics.length // timeDelta / 1000
-    ? historyMetrics.slice(historyMetrics.length - window)
-    : historyMetrics;
+  const windowMetrics = (() => {
+    const start = historyMetrics.length - (window + slide + 1);
+    const end = start + window;
+    return historyMetrics.slice(start, end);
+  })();
 
   const data = windowMetrics.reduce((acc, slice) => ({
     [MSG_INCOMING_TOTAL_COUNT]: [...acc[MSG_INCOMING_TOTAL_COUNT], createSliceData(slice[TIME_STAMP], slice[MSG_INCOMING_TOTAL_COUNT])],
